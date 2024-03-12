@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\V1;
 use Illuminate\Support\Facades\Route;
+use Orion\Facades\Orion;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +14,11 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+
+Route::group(['middleware' => ['auth:api'], 'as' => 'api.'], function () {
+    Orion::resource('products', V1\ProductController::class);
+    Orion::resource('categories', V1\CategoryController::class);
+});
 
 /*
 |--------------------------------------------------------------------------
