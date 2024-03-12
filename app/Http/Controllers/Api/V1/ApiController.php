@@ -3,14 +3,22 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Api\Authentication\StoreUserRequest;
+use App\Http\Requests\Api\Authentication\LoginUserRequest;
+use App\Http\Requests\Api\Authentication\RegisterUserRequest;
 use App\Models\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class ApiController extends Controller
 {
-    public function register(StoreUserRequest $request)
+    /**
+     * Register a user
+     *
+     * @param  mixed $request
+     * @return void
+     */
+    public function register(RegisterUserRequest $request): JsonResponse
     {
         $status = false;
         $message = 'Oops! Something went wrong!';
@@ -30,13 +38,6 @@ class ApiController extends Controller
         } catch (\Exception $err) {
             \Log::error("Error: Register user details. " . $err);
         }
-        // $validated = $request->validated();
-        // $fails = $request->fails();
-        // \Log::info($validated);
-        // dd($validated, $fails);
-
-        // $user = User::create($request->validated());
-        // dd($user);
 
         return response()->json([
             'status' => $status,
@@ -45,15 +46,75 @@ class ApiController extends Controller
         ]);
     }
 
-    public function login(Request $request)
+    public function login(LoginUserRequest $request)
     {
+        $response = [
+            'status' => false,
+            'message' => "Incorrect details... Please try again!",
+        ];
+
+        try {
+            $data = $request->validated();
+
+            if (auth()->attempt($data)) {
+                $response = [
+                    'status' => true,
+                    'message' => "You have successfully logged in!",
+                    'user' => auth()->user(),
+                    'token' => auth()->user()->createToken('Login API Token')->accessToken
+                ];
+            }
+        } catch (\Exception $err) {
+            \Log::error("Error: Login user details. " . $err);
+        }
+
+        return response()->json([
+            ...$response
+        ]);
     }
 
     public function profile()
     {
+        $response = [
+            'status' => false,
+            'message' => "Oops! Something went wrong!",
+        ];
+
+        $user = auth()->user();
+
+        if ($user) {
+            $response = [
+                'status' => true,
+                'message' => "Profile Details!",
+                'data' => $user
+            ];
+        }
+
+        return response()->json([
+            ...$response
+        ]);
     }
 
     public function logout()
     {
+        $response = [
+            'status' => false,
+            'message' => "Oops! Something went wrong!",
+        ];
+
+        try {
+            auth()->user()->token()->revoke();
+
+            $response = [
+                'status' => true,
+                'message' => 'User logged out'
+            ];
+        } catch (\Exception $err) {
+            \Log::error("Error: Logout user. " . $err);
+        }
+
+        return response()->json([
+            ...$response
+        ]);
     }
 }
