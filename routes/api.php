@@ -15,16 +15,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
-
 // OPEN ROUTES
-Route::post('register', [V1\ApiController::class, 'register'])->name('register');
-Route::post('login', [V1\ApiController::class, 'login'])->name('login');
+Route::post('register', [V1\RegisterController::class, 'store']);
+Route::post('login', [V1\AuthenticatedController::class, 'store']);
 
 // PROTECTED ROUTES
 Route::group(['middleware' => ['auth:api']], function () {
-    Route::get('profile', [V1\ApiController::class, 'profile'])->name('profile');
-    Route::get('logout', [V1\ApiController::class, 'logout'])->name('logout');
+    // Route::get('profile', [V1\UserAuthController::class, 'profile'])->name('profile');
+    Route::post('logout', [V1\AuthenticatedController::class, 'destroy'])->name('logout');
 });
