@@ -32,7 +32,7 @@ class AuthenticatedController extends Controller
                 $responses = [
                     'status' => 200,
                     'message' => "You have successfully logged in!",
-                    'token' => auth()->user()->createToken('Login API Token')->accessToken
+                    'token' => auth()->user()->createToken('LaravelAuthApp')->accessToken
                 ];
             }
         } catch (\Exception $err) {

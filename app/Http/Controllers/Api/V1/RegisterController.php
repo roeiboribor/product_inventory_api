@@ -29,7 +29,7 @@ class RegisterController extends Controller
             $data = $request->validated();
             $data['password'] = Hash::make('password');
             $user = User::create($data);
-            $token = $user->createToken('Register API Token')->accessToken;
+            $token = $user->createToken('LaravelAuthApp')->accessToken;
             $responses = [
                 'status' => 200,
                 'message' => 'User has been created!',

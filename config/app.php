@@ -168,7 +168,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        // Laravel Passport (Created At: March 12, 2024)
+        // Laravel Passport
         Laravel\Passport\PassportServiceProvider::class,
     ])->toArray(),
 
