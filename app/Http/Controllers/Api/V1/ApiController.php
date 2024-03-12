@@ -46,7 +46,13 @@ class ApiController extends Controller
         ]);
     }
 
-    public function login(LoginUserRequest $request)
+    /**
+     * Login the user details
+     *
+     * @param  mixed $request
+     * @return JsonResponse
+     */
+    public function login(LoginUserRequest $request): JsonResponse
     {
         $response = [
             'status' => false,
@@ -73,7 +79,12 @@ class ApiController extends Controller
         ]);
     }
 
-    public function profile()
+    /**
+     * Get current authenticated user details
+     *
+     * @return JsonResponse
+     */
+    public function profile(): JsonResponse
     {
         $response = [
             'status' => false,
@@ -95,7 +106,12 @@ class ApiController extends Controller
         ]);
     }
 
-    public function logout()
+    /**
+     * Logout current authenticated user
+     *
+     * @return JsonResponse
+     */
+    public function logout(): JsonResponse
     {
         $response = [
             'status' => false,
