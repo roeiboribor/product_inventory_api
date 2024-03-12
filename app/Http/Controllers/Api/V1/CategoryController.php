@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Requests\Api\CategoryRequest;
 use App\Models\Category;
-use Illuminate\Validation\Rule;
 use Orion\Concerns\DisableAuthorization;
 use Orion\Http\Controllers\Controller;
 
