@@ -14,10 +14,10 @@ use Orion\Facades\Orion;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-
-Route::group(['middleware' => ['auth:api'], 'as' => 'api.'], function () {
-    Orion::resource('products', V1\ProductController::class);
-    Orion::resource('categories', V1\CategoryController::class);
+// 'middleware' => ['auth:api'], 
+Route::group(['as' => 'api.'], function () {
+    Orion::resource('products', V1\ProductController::class)->withSoftDeletes();
+    Orion::resource('categories', V1\CategoryController::class)->withSoftDeletes();
 });
 
 /*
