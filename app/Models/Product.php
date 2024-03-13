@@ -14,7 +14,7 @@ class Product extends Model
     protected $guarded = ['id'];
 
     /**
-     * Get the user that owns the Product
+     * Get the category that owns the Product
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

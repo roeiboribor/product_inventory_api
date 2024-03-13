@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\V1;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Orion\Facades\Orion;
 
@@ -14,10 +15,13 @@ use Orion\Facades\Orion;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-// 'middleware' => ['auth:api'], 
+
 Route::group(['middleware' => ['auth:api'], 'as' => 'api.'], function () {
     Orion::resource('products', V1\ProductController::class)->withSoftDeletes();
     Orion::resource('categories', V1\CategoryController::class)->withSoftDeletes();
+
+    Orion::belongsToResource('products', 'category', V1\ProductCategoryController::class);
+    Orion::hasManyResource('categories', 'products', V1\CategoryProductsController::class);
 });
 
 /*
