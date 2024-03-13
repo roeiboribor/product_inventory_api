@@ -15,7 +15,7 @@ use Orion\Facades\Orion;
 |
 */
 // 'middleware' => ['auth:api'], 
-Route::group(['as' => 'api.'], function () {
+Route::group(['middleware' => ['auth:api'], 'as' => 'api.'], function () {
     Orion::resource('products', V1\ProductController::class)->withSoftDeletes();
     Orion::resource('categories', V1\CategoryController::class)->withSoftDeletes();
 });
