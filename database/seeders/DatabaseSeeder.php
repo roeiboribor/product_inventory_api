@@ -23,7 +23,8 @@ class DatabaseSeeder extends Seeder
         Artisan::call('passport:install');
 
         $this->call([
-            CategoriesSeeder::class
+            CategoriesSeeder::class,
+            ProductsSeeder::class,
         ]);
     }
 }
