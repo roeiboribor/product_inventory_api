@@ -26,7 +26,7 @@ class InventoryLevelFactory extends Factory
     {
         return [
             'product_id' => $this->faker->numberBetween(1, 15),
-            'quantity' => $this->faker->numberBetween(5, 99),
+            'quantity' => $this->faker->numberBetween(-10, 99),
         ];
     }
 }

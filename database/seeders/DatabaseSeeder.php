@@ -24,7 +24,6 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             CategoryProductsSeeder::class,
-            InventoryLevelsSeeder::class,
         ]);
     }
 }

@@ -16,7 +16,8 @@ return new class extends Migration
             $table->foreignId('category_id')->onDelete('cascade');
             $table->string('name');
             $table->text('description');
-            $table->decimal('price', 8, 2);
+            $table->decimal('price', 8, 2)->default(0.00);
+            $table->unsignedInteger('quantity')->default(0);
             $table->softDeletes()->index('idx_deleted_at');
             $table->timestamps();
         });
