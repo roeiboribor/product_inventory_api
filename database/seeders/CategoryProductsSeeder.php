@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Category;
+use App\Models\InventoryLevel;
 use App\Models\Product;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -31,12 +32,17 @@ class CategoryProductsSeeder extends Seeder
     public function createProducts($products, $categoryId)
     {
         foreach ($products as $product) {
-            Product::create([
+            $product = Product::create([
                 'category_id' => $categoryId,
                 'name' => $product['name'],
                 'description' => $product['description'],
                 'price' => $product['price'],
                 'quantity' => $product['quantity'],
+            ]);
+
+            InventoryLevel::create([
+                'product_id' => $product->id,
+                'quantity' => $product->quantity
             ]);
         }
     }

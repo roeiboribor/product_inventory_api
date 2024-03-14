@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('inventory_levels', function (Blueprint $table) {
-            $table->foreignId('product_id')->constrained();
+            $table->foreignId('product_id')->constrained('products');
             $table->integer('quantity')->default(0);
             $table->timestamps();
         });

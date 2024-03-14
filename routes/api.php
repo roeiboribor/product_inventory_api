@@ -22,6 +22,8 @@ Route::group(['middleware' => ['auth:api'], 'as' => 'api.'], function () {
 
     Orion::belongsToResource('products', 'category', V1\ProductCategoryController::class);
     Orion::hasManyResource('categories', 'products', V1\CategoryProductsController::class);
+
+    Route::post('/products/adjust-stock', [V1\ProductController::class, 'adjustStock'])->name('products.adjust-stock');
 });
 
 /*
