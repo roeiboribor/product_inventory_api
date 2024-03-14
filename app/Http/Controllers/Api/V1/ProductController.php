@@ -24,41 +24,13 @@ class ProductController extends Controller
     protected $request = ProductRequest::class;
 
     /**
-     * The attributes that are used for searching.
-     *
-     * @return array
-     */
-    public function searchableBy(): array
-    {
-        return ['name'];
-    }
-
-    /**
      * The attributes that are used for filtering.
      *
      * @return array
      */
     public function filterableBy(): array
     {
-        return ['category.name', 'price'];
-    }
-
-    /**
-     * The relations that are allowed to be included together with a resource.
-     *
-     * @return array
-     */
-    public function includes(): array
-    {
-        return ['category.*'];
-    }
-
-    public function afterIndex()
-    {
-
-        // Your code here
-
-        return view('');
+        return ['category.*', 'price'];
     }
 
     //* >>>>>>>>> CUSTOM FUNCTIONS <<<<<<<<<<<<<
